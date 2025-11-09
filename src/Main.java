@@ -1,15 +1,38 @@
-//TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
-// click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
+import view.FrmFuncionario;
+
+import javax.swing.*;
+
+/**
+ * Clase principal de la aplicación
+ * Sistema de Gestión de Talento Humano
+ */
 public class Main {
     public static void main(String[] args) {
-        //TIP Press <shortcut actionId="ShowIntentionActions"/> with your caret at the highlighted text
-        // to see how IntelliJ IDEA suggests fixing it.
-        System.out.printf("Hello and welcome!");
-
-        for (int i = 1; i <= 5; i++) {
-            //TIP Press <shortcut actionId="Debug"/> to start debugging your code. We have set one <icon src="AllIcons.Debugger.Db_set_breakpoint"/> breakpoint
-            // for you, but you can always add more by pressing <shortcut actionId="ToggleLineBreakpoint"/>.
-            System.out.println("i = " + i);
+        // Establecer el Look and Feel del sistema operativo
+        try {
+            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+        } catch (Exception e) {
+            System.err.println("No se pudo establecer el Look and Feel: " + e.getMessage());
         }
+
+        // Crear y mostrar el formulario en el hilo de eventos de Swing
+        SwingUtilities.invokeLater(() -> {
+            try {
+                FrmFuncionario frame = new FrmFuncionario();
+                frame.setVisible(true);
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(null,
+                        "Error al iniciar la aplicación: " + e.getMessage() +
+                                "\n\nVerifique que:\n" +
+                                "1. El archivo db.properties existe en el directorio raíz\n" +
+                                "2. La base de datos 'talento_humano' está creada\n" +
+                                "3. El servidor MySQL está ejecutándose\n" +
+                                "4. Las credenciales en db.properties son correctas",
+                        "Error de Inicialización",
+                        JOptionPane.ERROR_MESSAGE);
+                e.printStackTrace();
+                System.exit(1);
+            }
+        });
     }
 }

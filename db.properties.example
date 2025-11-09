@@ -1,0 +1,6 @@
+# Configuración de conexión a la base de datos MySQL
+# Copia este archivo como 'db.properties' y configura tus credenciales
+
+db.url=jdbc:mysql://localhost:3306/talento_humano
+db.user=root
+db.password=tu_password_aqui
